@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class="entry_form" action="/submitEntry" method="post">
+        <% if(locals.items){ %>
+        <select name="product" id="item">
+            <% for(let i=0;i<items.length;i++){ %>
+            <option value="<%= items[i].name %>"><%= items[i].name %></option>
+            <% } %>
+        </select>
+        <% } %>
+    <% if(locals.locns){ %>
+        <select name="locn" id="location">
+            <% for(let j=0;j<locns.length;j++){ %>
+            <option value="<%= locns[j].loc_name %>"><%= locns[j].loc_name %></option>
+            <% } %>
+        </select>
+        <% } %>
+        <% if(locals.custs){ %>
+            <select name="custs" id="item">
+                <% for(let i=0;i<custs.length;i++){ %>
+                <option value="<%= custs[i].cust_name %>"><%= custs[i].cust_name %></option>
+                <% } %>
+            </select>
+            <% } %>
+
+        <input type="text" name="remark"/>
+        <input type="submit" name="submit"/>
+    </form>
+</body>
+</html>
