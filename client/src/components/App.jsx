@@ -14,9 +14,6 @@ function App(){
                 <Route path='/add/location' element={<LocnCustEntry entry='Location' />} />
                 <Route path='/add/cust' element={<LocnCustEntry entry='Cust' />} />
             </Routes>
-            <Link to="/itemEntry">
-                <button>ITEM ENTRY</button>
-            </Link>
         </Router>
     </div>);
 }

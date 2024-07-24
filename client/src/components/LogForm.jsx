@@ -41,13 +41,12 @@ function LogForm(props){
 
     function setStateDet(event){
         event.preventDefault();
-        console.log($(".login-heading").text());
         const data  = logDet;
         if(data.name === "Login"){
             setLogDet({
                 name:"Register"
             });
-            $(".text-input").toggle();
+            $(".TextInput-container").toggle();
             $(".login-heading").text("Register");
             $(".logForm-toggle").text("Login");
             $(".logForm-input-container").attr("Login");
@@ -56,7 +55,7 @@ function LogForm(props){
             setLogDet({
                 name:"Login"
             });
-            $(".text-input").toggle();
+            $(".TextInput-container").toggle();
             $(".login-heading").text("Login");
             $(".logForm-toggle").text("Register");
             $(".logForm-input-container").attr("Login");
@@ -69,8 +68,8 @@ function LogForm(props){
                     <h3 className="login-heading center" >Login</h3>
                     <form className="logForm-input-container">
                         <TextInput className="logForm-input" name='Username'/>
-                        <EmailInput className="logForm-input"/>
-                        <PassInput className="logForm-input"/>
+                        <EmailInput className="logForm-input" name='Email'/>
+                        <PassInput className="logForm-input" name='Password'/>
                         <button onClick={postLogin} className="logForm-submit btn btn-primary">Submit</button>
                     </form>    
             </div>

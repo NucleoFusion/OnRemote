@@ -14,7 +14,7 @@ function SelectFormInput(props){
       }, [props.name]);    
     return( 
         <div>
-            <select name={props.name} id={props.name}>
+            <select name={props.name} id={props.name} className="form-select" aria-label="Default select example">
                 {resultArr.map( (obj)=> {
                     return ( 
                         <SelectOption key={obj.id} name={obj.name}/>

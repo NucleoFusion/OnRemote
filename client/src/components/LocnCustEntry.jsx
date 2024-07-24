@@ -34,10 +34,11 @@ function LocnCustEntry(props){
     
     
     return (
-        <div>
-            <form>
+        <div className="LocnCustEntry-container">
+            <form className="LocnCustEntry-form">
+                <h3 className="LocnCustEntry-title">{props.entry}</h3>
                 <TextInput name={props.entry} />
-                <button onClick={postData} className="logForm-submit btn btn-primary">Submit</button>
+                <button onClick={postData} className="logForm-submit LocnCustEntry-submit btn btn-primary">Submit</button>
             </form>
         </div>
     );

@@ -21,14 +21,16 @@ function ItemEntryForm(){
         });
     }
     return ( 
-        <form>
-            <TextInput name='customer_name' />
-            <SelectFormInput name='products' />
-            <SelectFormInput name='locations' />
-            <SelectFormInput name='cust' />
-            <TextInput name='Remarks' />
-            <button onClick={postForm} className="logForm-submit btn btn-primary">Submit</button>
-        </form>
+        <div className="ItemEntryForm-container">
+            <form className="ItemEntryForm-form">
+                <TextInput name='customer_name' />
+                <SelectFormInput name='products' />
+                <SelectFormInput name='locations' />
+                <SelectFormInput name='cust' />
+                <TextInput name='Remarks' />
+                <button onClick={postForm} className="logForm-submit ItemEntryForm-submit btn btn-primary">Submit</button>
+            </form>
+        </div>
      );
 }
 
