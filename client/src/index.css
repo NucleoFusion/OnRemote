@@ -140,3 +140,25 @@
 .LocnCustEntry-title{
   text-align: center;
 }
+
+.ProdEntry-container{
+  width: 50%;
+  height: 50%;
+
+  margin-top: 25vh;
+  margin-left: 25vw;
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.ProdEntry-form{
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 75%;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+
+  justify-content: center;
+  align-items: center;
+}

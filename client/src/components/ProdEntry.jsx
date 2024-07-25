@@ -20,6 +20,7 @@ function ProdEntry(){
     return (
         <div className="ProdEntry-container">
             <form className="ProdEntry-form">
+                <h4 className="LocnCustEntry-title">Add Product</h4>
                 <TextInput name='Product' />
                 <TextInput name='HSN' />
                 <button onClick={postForm} className="logForm-submit ProdEntry-submit btn btn-primary">Submit</button>
