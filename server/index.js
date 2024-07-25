@@ -68,10 +68,15 @@ app.post('/post/cust', (req,res)=>{
     db.query('INSERT INTO customer(name) VALUES ($1)',[req.body.locn]);
 });
 
+app.post('/post/product', (req,res)=>{
+    console.log('POST',req.body);
+    db.query('INSERT INTO product(name,hsn) VALUES ($1,$2)',[req.body.product,req.body.HSN]);
+});
+
 app.post('/post/itemEntry',async (req,res)=>{
     console.log(req.body);
     const prod_id = (await db.query('SELECT * FROM product WHERE name = $1',[req.body.products])).rows[0].id;
-    const cust_id = (await db.query('SELECT * FROM customer WHERE name = $1',[req.body.cust])).rows[0].cust_id;
+    const cust_id = (await db.query('SELECT * FROM customer WHERE name = $1',[req.body.cust])).rows[0].id;
     const locn_id = (await db.query('SELECT * FROM locations WHERE name = $1',[req.body.location])).rows[0].id;
     db.query('INSERT INTO entry(customer,remarks,prod_id,cust_id,locn_id) VALUES ($1,$2,$3,$4,$5)',[req.body.customer_name,req.body.remarks,prod_id,cust_id,locn_id]);
 });
