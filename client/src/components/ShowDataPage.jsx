@@ -1,7 +1,6 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import ShowDataContainer from "./ShowDataContainer";
 
 function ShowDataPage(props){
@@ -18,7 +17,12 @@ function ShowDataPage(props){
     }, [props.name]);  
     
     return (
-        <div>
+        <div className="ShowDataPage-container">
+            <div className="ShowDataContainer-container">
+                <h3 className="text-align">Serial</h3>
+                <h3 className="text-align">{(props.name)}</h3>
+                {(props.name === 'products') ? <h3 className="text-align">HSN</h3> : <></> }
+            </div>
             {resultArr.map( (obj)=>{
                 return <ShowDataContainer name={obj.name} id={`${obj.id}`} hsn={obj.hsn} />
             })}

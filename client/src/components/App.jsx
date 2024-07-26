@@ -5,6 +5,8 @@ import ItemEntryForm from "./ItemEntryForm";
 import LocnCustEntry from "./LocnCustEntry";
 import ProdEntry from './ProdEntry';
 import ShowDataPage from "./ShowDataPage";
+import Layout from "./Layout";
+import Home from "./Home";
 
 function PassDataToShowData(){
     let {name} = useParams();
@@ -24,15 +26,19 @@ function App(){
     <div>
         <Router>
             <Routes>
-                <Route path="/itemEntry" element={<ItemEntryForm />} />
-                <Route path='/' element={<LogForm name="Login" />} />
-                <Route path='/add/location' element={<LocnCustEntry entry='Location' />} />
-                <Route path='/add/cust' element={<LocnCustEntry entry='Cust' />} />
-                <Route path='/add/product' element={<ProdEntry />} />
-                <Route path='/show/:name' element={<PassDataToShowData />} />
+                <Route element={<Layout />} >
+                    <Route path="/itemEntry" element={<ItemEntryForm />} />
+                    <Route path='/' element={<LogForm name="Login" />} />
+                    <Route path='/home' element={<Home />} />
+                    <Route path='/add/location' element={<LocnCustEntry entry='Location' />} />
+                    <Route path='/add/cust' element={<LocnCustEntry entry='Cust' />} />
+                    <Route path='/add/product' element={<ProdEntry />} />
+                    <Route path='/show/:name' element={<PassDataToShowData />} />
+                </Route>
             </Routes>
         </Router>
-    </div>);
+    </div>
+    );
 }
 
 export default App;

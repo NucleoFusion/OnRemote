@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PassInput from "./PassInput";
 import TextInput from "./TextInput";
 import EmailInput from "./EmailInput";
 import axios from "axios";
 import $ from "jquery";
+import { Link } from "react-router-dom";
 
 
 function LogForm(props){
     const [logDet,setLogDet] = useState({
         name: "Login"
     });
+    
+    useEffect( ()=>{
+        $(".toHide").toggle();
+    },[])
 
     async function postLogin(e){
         e.preventDefault();
@@ -36,6 +41,8 @@ function LogForm(props){
                     }
             })
         }
+        console.log('CLicked');
+
         
     }
 
@@ -46,7 +53,7 @@ function LogForm(props){
             setLogDet({
                 name:"Register"
             });
-            $(".TextInput-container").toggle();
+            $(".toHide").toggle();
             $(".login-heading").text("Register");
             $(".logForm-toggle").text("Login");
             $(".logForm-input-container").attr("Login");
@@ -55,7 +62,7 @@ function LogForm(props){
             setLogDet({
                 name:"Login"
             });
-            $(".TextInput-container").toggle();
+            $(".toHide").toggle();
             $(".login-heading").text("Login");
             $(".logForm-toggle").text("Register");
             $(".logForm-input-container").attr("Login");
@@ -64,18 +71,20 @@ function LogForm(props){
     
     return (
         <div className="logForm-container">
-            <div className="logForm-container-element justify-right">
-                    <h3 className="login-heading center" >Login</h3>
+            <div className="logForm-outer-container">
                     <form className="logForm-input-container">
+                        <h3 className="login-heading center" >Login</h3>
                         <TextInput className="logForm-input" name='Username'/>
                         <EmailInput className="logForm-input" name='Email'/>
                         <PassInput className="logForm-input" name='Password'/>
-                        <button onClick={postLogin} className="logForm-submit btn btn-primary">Submit</button>
+                        <Link to='/home' >
+                            <button onClick={postLogin} className="logForm-submit btn btn-primary">Submit</button>
+                        </Link>
                     </form>    
-            </div>
-            <div className="logForm-container-element justify-left center-child">
-            <button onClick={setStateDet} name="Register" className="logForm-toggle logForm-submit btn btn-primary">Register</button>
-            </div>
+                <div className="logForm-container-element justify-left center-child">
+                    <button onClick={setStateDet} name="Register" className="logForm-toggle logForm-submit btn btn-primary">Register</button>
+                </div>
+                </div>
         </div>
     );
 }
