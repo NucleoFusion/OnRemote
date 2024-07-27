@@ -84,27 +84,53 @@ app.post('/post/itemEntry',async (req,res)=>{
 
 //login route
 
-app.post("/login",
-    passport.authenticate("local", {
-        successRedirect: "/itemEntry",
-        failureRedirect: "/",
-        failureMessage: "WRONG PASSWORD",
+app.post("/login",async (req,res)=>{
+    const username = req.body.email;
+    const password = req.body.password;
+    const result = await db.query("SELECT * FROM users WHERE username = $1 ", [username]);
+    if((result.rows.length === 0)){
+        res.json({
+            auth: 'USER NOT FOUND'
+        });
+    }
+    const user = result.rows[0];
+    console.log(user);
+    bcrypt.compare(password,user.password, (err,result)=>{
+        if(err){
+            console.log('ERROR COMPARING')
+        }
+        if(result){
+            res.json({
+                auth:'AUTHENTICATED',
+                id: user.id,
+                admin: user.adminstrator
+            });
+        }
+        else{
+            res.json({
+                auth:'WRONG PASSWORD'
+            });
+        }
     })
-);
+});
 
 //register route
 
 app.post("/register", async (req,res)=> {
-    const username = req.body.username;
+    const username = req.body.email;
     const password = req.body.password;
     const token = req.body.token;
-    try{
+    // try{
         if(token != process.env.ADMIN_TOKEN){
-            res.send("WRONG TOKEN");
+            res.json({
+                auth: 'WRONG TOKEN'
+            });
         } else{
             const result = await db.query('SELECT * FROM users WHERE username = $1', [username]);
             if( result.rows.length > 0){
-                res.send("USERNAME EXISTS");
+                res.send({
+                    auth: 'USERNAME EXISTS'
+                });
             } else{
                 bcrypt.hash(password, saltRounds, async (err,hash) => {
                     if(err) console.log("ERROR hashing",err);
@@ -112,17 +138,18 @@ app.post("/register", async (req,res)=> {
                         "INSERT INTO users (username, password, adminstrator) VALUES ($1, $2, $3) RETURNING *",
                         [username, hash, false]
                       );
-                })
-                const user = result.rows[0];
-                req.login(user, (err) => {
-                    console.log("success");
-                    res.redirect("/itemEntry");
+                    const user = result.rows[0];
+                    res.json({
+                        auth: 'AUTHENTICATED',
+                        id: result.rows[0].id,
+                        admin: result.rows[0].adminstrator
+                    });
                 });
             }
         }
-    } catch(err){
-        console.log("ERRor registering");
-    }
+    // } catch(err){
+    //     console.log("ERRor registering");
+    // }
 });
 
 //rendering login page
