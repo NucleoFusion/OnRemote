@@ -153,7 +153,6 @@ app.post("/register", async (req,res)=> {
 });
 
 //rendering login page
-
 app.get("/", (err,res) => {
     res.render("login.ejs");
 });

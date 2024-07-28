@@ -1,9 +1,19 @@
-import React from "react";
+import React,{useEffect} from "react";
 import TextInput from "./TextInput";
 import axios from "axios";
 import $ from 'jquery';
+import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 function ProdEntry(){
+
+    const navigate = useNavigate();
+    useEffect( ()=>{
+        if(Cookies.get('auth') !== 'AUTHENTICATED'){
+            navigate('/');
+        }
+    },[]);
+
     async function postForm(event){
         event.preventDefault();
         await axios.post('http://localhost:3000/post/product',{

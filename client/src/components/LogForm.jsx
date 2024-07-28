@@ -14,7 +14,7 @@ function LogForm(props){
     });
     const navigate = useNavigate();
     useEffect( ()=>{
-        if(Cookies.get('id')){
+        if(Cookies.get('auth') === 'AUTHENTICATED'){
             navigate('/home')
         }
         $(".toHide").hide();
@@ -36,11 +36,11 @@ function LogForm(props){
                       'Content-Type': 'application/x-www-form-urlencoded'
                     }
             });
-            console.log(result.data);
             if(result.data.auth === 'AUTHENTICATED'){
                 alert('Logged In');
                 Cookies.set('id',result.data.id);
                 Cookies.set('admin',result.data.admin);
+                Cookies.set('auth',result.data.auth);
                 navigate('/home');
             } else if(result.data.auth === 'USER NOT FOUND'){
                 alert('User was not found');

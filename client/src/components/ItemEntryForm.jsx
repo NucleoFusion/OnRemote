@@ -1,10 +1,20 @@
-import React from "react";
+import React,{useEffect} from "react";
 import SelectFormInput from "./SelectFormInput";
 import axios from "axios";
 import TextInput from "./TextInput";
 import $ from 'jquery';
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 
 function ItemEntryForm(){
+
+    const navigate = useNavigate();
+    useEffect( ()=>{
+        if(Cookies.get('auth') !== 'AUTHENTICATED'){
+            navigate('/');
+        }
+    },[]);
+
     async function postForm(event){
         event.preventDefault();
         await axios.post('http://localhost:3000/post/itemEntry',{

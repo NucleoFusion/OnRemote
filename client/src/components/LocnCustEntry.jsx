@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import TextInput from "./TextInput";
 import $ from 'jquery';
+import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 function LocnCustEntry(props){
     const [entryType,setEntryType] = useState({ 
         entryType: props.entry,
     });
+
+    const navigate = useNavigate();
+    useEffect( ()=>{
+        if(Cookies.get('auth') !== 'AUTHENTICATED'){
+            navigate('/');
+        }
+    },[]);
+
     console.log(entryType);
     async function postData(event){
         event.preventDefault()
