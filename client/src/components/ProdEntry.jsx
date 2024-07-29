@@ -16,6 +16,10 @@ function ProdEntry(){
 
     async function postForm(event){
         event.preventDefault();
+        if(Cookies.get('admin') === 'false'){
+            alert('Admin Priveleges Required');
+            navigate('/');
+        }
         await axios.post('http://localhost:3000/post/product',{
             product: $('#Product').val(),
             HSN: $('#HSN').val()

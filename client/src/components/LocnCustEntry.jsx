@@ -17,8 +17,11 @@ function LocnCustEntry(props){
         }
     },[]);
 
-    console.log(entryType);
     async function postData(event){
+        if(Cookies.get('admin') === 'false'){
+            alert('Admin Priveleges Required');
+            navigate('/');
+        }
         event.preventDefault()
         if(entryType.entryType === 'Location'){
             await axios.post('http://localhost:3000/post/location',{

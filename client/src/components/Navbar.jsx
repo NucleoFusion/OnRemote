@@ -48,6 +48,30 @@ function Navbar(){
                         </ul>
                         </div>
                     </li>
+                    <li className="nav-item dropdown">
+                        <div className="dropdown">
+                        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Add Data
+                        </button>
+                        <ul className="dropdown-menu">
+                            <li>
+                                <Link to='/add/location'>
+                                    <button className="dropdown-item" type="button">Locations</button>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to='/add/cust'>
+                                    <button className="dropdown-item" type="button">Customer</button>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to='/add/product'>
+                                    <button className="dropdown-item" type="button">Products</button>
+                                </Link>
+                            </li>
+                        </ul>
+                        </div>
+                    </li>
                 </ul>
                 </div>
             </div>
