@@ -70,12 +70,12 @@ app.get("/token", async (req, res) => {
   const result = await db.query("SELECT * FROM users WHERE email = $1", [
     email,
   ]);
-  if (result.rows[0].adminstrator == false) {
-    res.json({
-      message: "Account Not Admin",
-    });
-  }
   if (result.rows.length > 0) {
+    if (result.rows[0].adminstrator == false) {
+      res.json({
+        message: "Account Not Admin",
+      });
+    }
     bcrypt.compare(password, result.rows[0].password, async (err, result) => {
       if (err) console.error(err);
       if (result) {
